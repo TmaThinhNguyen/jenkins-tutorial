@@ -1,37 +1,30 @@
 pipeline {
-    agent { 
-        node {
-            label 'jenkins-agent-goes-here'
-            }
-      }
-      triggers{
-        pollSCM '*/5 * * * *'
-      }
+    agent any
+    triggers{
+            pollSCM '*/5 * * * *'
+          }
     stages {
         stage('Build') {
             steps {
-                echo "Building.."
+                echo 'Building..'
                 sh '''
-                cd myapp
-                pip install -r requirements.txt
+                echo "doing build stuff"
                 '''
             }
         }
         stage('Test') {
             steps {
-                echo "Testing.."
+                echo 'Testing..'
                 sh '''
-                cd myapp
-                python3 hello.py
-                python3 hello.py --name=Brad
+                echo "doing testing stuff"
                 '''
             }
         }
-        stage('Deliver') {
+        stage('Deploy') {
             steps {
-                echo 'Deliver....'
+                echo 'Deploying....'
                 sh '''
-                echo "doing delivery stuff.."
+                echo "doing deploy stuff"
                 '''
             }
         }
